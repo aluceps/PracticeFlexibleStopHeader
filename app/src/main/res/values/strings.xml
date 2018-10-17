@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PracticeFlexibleStopHeader</string>
+    <string name="item_value">ドラマ「%1$s」で使われた久保田利伸のラブソング。</string>
 </resources>

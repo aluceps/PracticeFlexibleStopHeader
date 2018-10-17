@@ -61,7 +61,7 @@ class MainFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             (holder as DummyViewHolder).run {
-                initialize()
+                initialize(items[position])
             }
         }
 
@@ -82,7 +82,8 @@ class MainFragment : Fragment() {
                 ViewDummyItemBinding.bind(itemView)
             }
 
-            fun initialize() {
+            fun initialize(value: String) {
+                binding.value = value
                 binding.executePendingBindings()
             }
         }

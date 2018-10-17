@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     >
+
+    <data>
+
+        <variable
+            name="value"
+            type="String"
+            />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,30 +29,37 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextAppearance.AppCompat.Large"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:text="LA LA LA LOVESONG"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             />
 
         <TextView
             android:id="@+id/description"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="2"
             android:maxLines="2"
-            android:text="ドラマ「」で使われた久保田利伸のラブソング。"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@{@string/item_value(value)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="ドラマ「%1$s」で使われた久保田利伸のラブソング。ドラマ「%1$s」で使われた久保田利伸のラブソング。"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>
