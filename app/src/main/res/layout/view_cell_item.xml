@@ -17,15 +17,29 @@
         android:layout_height="wrap_content"
         >
 
-        <View
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/thumbnail"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/colorGray"
+            android:background="@color/colorLightGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            >
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Image"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:id="@+id/title"
@@ -36,7 +50,7 @@
             android:maxLines="1"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="LA LA LA LOVESONG"
+            android:text="@string/item_title"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/thumbnail"

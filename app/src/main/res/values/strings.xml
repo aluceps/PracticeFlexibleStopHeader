@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PracticeFlexibleStopHeader</string>
+    <string name="item_title">LA LA LA LOVESONG</string>
     <string name="item_value">ドラマ「%1$s」で使われた久保田利伸のラブソング。</string>
+    <string name="header_title">曲リスト</string>
 </resources>
