@@ -2,7 +2,6 @@ package me.aluceps.practiceflexiblestopheader
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -33,22 +32,32 @@ class MainFragment : Fragment() {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(context)
             isMotionEventSplittingEnabled = false
-            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            addItemDecoration(StickyHeaderDecoration(context, LinearLayoutManager.VERTICAL, true).apply {
+                setInterface(mainAdapter)
+//                ContextCompat.getDrawable(context, R.drawable.shape_divider)?.let {
+//                    setDrawable(it)
+//                }
+            })
         }
     }
 
     private fun setData() {
         mainAdapter.run {
             clear()
-            for (i in 0..100) {
-                if (i % 10 == 0) addHeader("Section ${i / 10 + 1}")
-                add("number: %d".format(i))
+            for (i in 0..MAX_ITEM_COUNT) {
+                when (i % 10 == 0) {
+                    true -> addHeader("Section - ${i / 10}")
+                    else -> add("#%d".format(i))
+                }
             }
             notifyDataSetChanged()
         }
     }
 
     companion object {
+
+        private const val MAX_ITEM_COUNT = 99
+
         fun newInstance(): Fragment = MainFragment()
     }
 }

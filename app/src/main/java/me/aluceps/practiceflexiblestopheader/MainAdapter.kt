@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import me.aluceps.practiceflexiblestopheader.databinding.ViewCellHeaderBinding
 import me.aluceps.practiceflexiblestopheader.databinding.ViewCellItemBinding
 
-class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderDecoration.StickyInterface {
 
     private val items: MutableList<Item> = mutableListOf()
 
@@ -20,8 +20,8 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         items[position].run {
             when (type) {
-                Type.Header -> (holder as HeaderViewHolder).initialize(value)
-                Type.Item -> (holder as ItemViewHolder).initialize(value)
+                Type.Header -> (holder as HeaderViewHolder).initialize(text)
+                Type.Item -> (holder as ItemViewHolder).initialize(text)
             }
         }
     }
@@ -52,7 +52,7 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private data class Item(
             val type: Type,
-            val value: String
+            val text: String
     )
 
     private class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -78,4 +78,25 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.executePendingBindings()
         }
     }
+
+    override fun getHeaderPositionForItem(position: Int): Int {
+        var headerPosition = StickyHeaderDecoration.OUT_OF_BOUNDS
+        for (itemPosition in position downTo 0) {
+            if (isHeader(itemPosition)) {
+                headerPosition = itemPosition
+                return headerPosition
+            }
+        }
+        return headerPosition
+    }
+
+    override fun getHeaderLayout(position: Int): Int = R.layout.view_cell_header
+
+    override fun bindHeaderData(view: View, position: Int) {
+        if (position >= 0 && isHeader(position)) {
+            HeaderViewHolder(view).initialize(items[position].text)
+        }
+    }
+
+    override fun isHeader(position: Int): Boolean = items[position].type == Type.Header
 }
